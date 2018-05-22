@@ -1,4 +1,4 @@
-package pl.edu.wat.wcy.isi.orr.wieczorek.adrian;
+package pl.edu.wat.wcy.isi.orr.wieczorek.adrian.start;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
