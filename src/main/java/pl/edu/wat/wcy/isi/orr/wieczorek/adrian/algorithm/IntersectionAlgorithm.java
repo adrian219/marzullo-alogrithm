@@ -34,9 +34,9 @@ public class IntersectionAlgorithm extends Algorithm {
 
             for (Pair pair : pairList) {
                 endcount -= pair.getType();
-                low = pair.getOffset();
 
                 if (endcount >= m - f) {
+                    low = pair.getOffset();
                     break;
                 }
 
@@ -47,9 +47,9 @@ public class IntersectionAlgorithm extends Algorithm {
 
                 for (Pair pair2 : reservePairList) {
                     endcount += pair2.getType();
-                    high = pair2.getOffset();
 
                     if (endcount >= m - f) {
+                        high = pair2.getOffset();
                         break;
                     }
 
