@@ -1,19 +1,19 @@
 package pl.edu.wat.wcy.isi.orr.wieczorek.adrian.element;
 
 public class Pair implements Comparable<Pair> {
-    private Long offset;
+    private Double offset;
     private Integer type;
 
-    public Pair(Long offset, Integer type) {
+    public Pair(Double offset, Integer type) {
         this.offset = offset;
         this.type = type;
     }
 
-    public Long getOffset() {
+    public Double getOffset() {
         return offset;
     }
 
-    public void setOffset(Long offset) {
+    public void setOffset(Double offset) {
         this.offset = offset;
     }
 
@@ -25,9 +25,17 @@ public class Pair implements Comparable<Pair> {
         this.type = type;
     }
 
-
     @Override
     public int compareTo(Pair o) {
-        return o.getOffset().intValue() - this.getOffset().intValue();
+        if(o.getOffset().equals(this.getOffset())) return o.getType() - this.getType();
+        return (this.getOffset() - o.getOffset()) > 0 ? 1 : -1;
+    }
+
+    @Override
+    public String toString() {
+        return "Pair{" +
+                "offset=" + offset +
+                ", type=" + type +
+                '}';
     }
 }
