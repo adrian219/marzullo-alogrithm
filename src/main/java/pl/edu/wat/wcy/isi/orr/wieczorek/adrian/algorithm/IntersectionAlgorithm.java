@@ -18,8 +18,6 @@ public class IntersectionAlgorithm extends Algorithm {
         List<Pair> pairList = ListGetter.getSortPairList(intervalList, algorithmType);
         List<Pair> reservePairList = ListGetter.getReserveList(pairList);
 
-        System.out.println(pairList.toString());
-
         Integer midcount = 0;
         Integer endcount = 0;
 
