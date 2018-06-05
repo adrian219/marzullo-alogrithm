@@ -24,7 +24,12 @@ public class IntersectionAlgorithm extends Algorithm {
         Double low = 0.0;
         Double high = 0.0;
 
+        Double midLow = 0.0;
+        Double midHigh = 0.0;
+
         Integer m = intervalList.size();
+
+        Boolean isPossible;
 
         for (Integer f = 0; f < Math.round(m / 2.0); f++) {
             midcount = 0;
@@ -35,37 +40,38 @@ public class IntersectionAlgorithm extends Algorithm {
 
                 if (endcount >= m - f) {
                     low = pair.getOffset();
-                    break;
-                }
-
-                if (pair.getType().equals(0)) {
-                    midcount++;
                     endcount = 0;
-                }
 
-                for (Pair pair2 : reservePairList) {
-                    endcount += pair2.getType();
+                    for (Pair pair2 : reservePairList) {
+                        endcount += pair2.getType();
 
-                    if (endcount >= m - f) {
-                        high = pair2.getOffset();
-                        break;
+                        if (endcount >= m - f) {
+                            high = pair2.getOffset();
+
+                            if (low <= high && midcount <= f) {
+                                for(Pair pair3 : reservePairList){
+                                    if(pair3.getType().equals(0)) midHigh = pair3.getOffset();
+                                    if(pair3.getOffset() < high) break;
+                                }
+                                return new Interval(midLow, midHigh);
+                            }
+                        }else{
+                            if (pair2.getType().equals(0)) {
+                                midHigh = pair2.getOffset();
+                                midcount++;
+                            }
+                        }
                     }
 
-                    if (pair2.getType().equals(0)) {
+                }else{
+                    if (pair.getType().equals(0)) {
+                        midLow = pair.getOffset();
                         midcount++;
                     }
                 }
             }
-
-            if (midcount <= f) {
-                break;
-            }
         }
 
-        if (low > high) {
-            throw new InvalidIntervalException();
-        }
-
-        return new Interval(low, high);
+        throw new InvalidIntervalException();
     }
 }
